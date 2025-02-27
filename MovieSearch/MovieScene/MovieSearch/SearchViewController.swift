@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITableViewDataSource {
+class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     let viewModel = SearchVM()
     let tableView = UITableView()
@@ -58,6 +58,7 @@ class SearchViewController: UIViewController, UITableViewDataSource {
     
     func setupTableView() {
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
@@ -75,7 +76,21 @@ class SearchViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.text = viewModel.movies?.results[indexPath.row].title
+        if let imageUrl = URL(string: MovieSceneEndpoints.image(path: viewModel.movies?.results[indexPath.row].imagePath).imgUrl ?? "") {
+            URLSession.shared.dataTask(with: imageUrl, completionHandler: { data, _, _ in
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async(execute: {
+                        cell.imageView?.image = image
+                        cell.setNeedsLayout()
+                    })
+                }
+            }).resume()
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
     }
 }
 

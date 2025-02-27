@@ -9,6 +9,7 @@ import Foundation
 
 enum MovieSceneEndpoints {
     case search(text: String)
+    case image(path: String?)
 }
 
 extension MovieSceneEndpoints: Endpoint {
@@ -24,6 +25,15 @@ extension MovieSceneEndpoints: Endpoint {
         "/3/search/movie"
     }
     
+    var imgUrl: String? {
+        switch self {
+        case .image(path: let path):
+            return "https://image.tmdb.org/t/p/w500" + (path ?? "")
+        default:
+            return nil
+        }
+    }
+    
     var headers: [String : String]? {
         let apiKey = Bundle.main.infoDictionary?["ApiKey"] as? String
         return  ["Authorization": "Bearer \(apiKey ?? "")"]
@@ -33,6 +43,8 @@ extension MovieSceneEndpoints: Endpoint {
         switch self {
         case .search(text: let text):
             return ["query": text]
+        default:
+            return nil
         }
     }
     
