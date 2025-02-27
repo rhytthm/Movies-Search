@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ApiKey</key>
+	<string>eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NmI2ZjQ0MDhmMGNiNGVkNjNiZDE2ZTY3MjQyMGFmMCIsIm5iZiI6MTc0MDYzMjQ1MC45MDgsInN1YiI6IjY3YmZmMTgyNTUxYzA1NGJlY2EyM2Y2NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.s4k0VEkPVdrpuG9dxxFWSgjU0RFAZqVvxqAoU6ULQ4g</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -15,8 +17,6 @@
 					<string>Default Configuration</string>
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-					<key>UISceneStoryboardFile</key>
-					<string>Main</string>
 				</dict>
 			</array>
 		</dict>
